@@ -3,6 +3,18 @@
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
+          <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="encryption">encryption:</label>
+        </div>
+        <div class="md:w-2/3 text-gray-700">
+          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="encryption">
+            <option value="WPA">WPA</option>
+            <option value="WEP">WEP</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
           <label
             class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="ssid"
@@ -56,6 +68,7 @@ export default {
 
   data() {
     return {
+      encryption: 'WPA',
       ssid: null,
       password: null,
       generated: null
@@ -75,7 +88,7 @@ export default {
   methods: {
     generate() {
       if (!this.noSsid || !this.noPassword) {
-        this.generated = `WIFI:T:WPA;S:${this.ssid};P:${this.password};;`;
+        this.generated = `WIFI:T:${this.encryption};S:${this.ssid};P:${this.password};;`;
         // Event is a vue instance on window, window.Event
         Event.$emit("pass_string_generated", this.generated);
       }
