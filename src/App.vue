@@ -7,7 +7,7 @@
       <div class="w-full" v-show="showForm">
         <WifiQRCodeForm></WifiQRCodeForm>
       </div>
-      <div class="mx-auto mb-4">
+      <div class="mx-auto mb-4 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <QrcodeVue v-if="passString" :value="passString" :size="300"></QrcodeVue>
       </div>
       <p class="text-center text-sm text-gray-700 w-screen">built by <a href="https://twitter.com/bearzk">@bearzk</a></p>
