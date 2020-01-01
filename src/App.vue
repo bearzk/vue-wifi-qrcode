@@ -10,6 +10,7 @@
       <div class="mx-auto mb-4">
         <QrcodeVue v-if="passString" :value="passString" :size="300"></QrcodeVue>
       </div>
+      <p class="text-center text-sm text-gray-700 w-screen">built by <a href="https://twitter.com/bearzk">@bearzk</a></p>
       <p
         class="text-center text-sm text-gray-500 p-4"
       >ssid and password are not sent anywhere, the QR code is generated in browser using javascript.</p>
