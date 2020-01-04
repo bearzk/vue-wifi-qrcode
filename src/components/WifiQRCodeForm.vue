@@ -71,16 +71,19 @@
 <script>
 const mappings = {
   encryption: {
-    "zh-CN": "加密方式"
+    "zh-CN": "加密方式",
+    "de-DE": "Verschlüsselung"
   },
   ssid: {
     "zh-CN": "网络名称"
   },
   password: {
-    "zh-CN": "密码"
+    "zh-CN": "密码",
+    "de-DE": "Passwort"
   },
   generate: {
-    "zh-CN": "生成二维码"
+    "zh-CN": "生成二维码",
+    "de-DE": "Generieren"
   }
 };
 
