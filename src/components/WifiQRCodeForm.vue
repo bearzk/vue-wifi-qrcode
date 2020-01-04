@@ -3,10 +3,16 @@
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="md:flex md:items-center mb-6">
         <div class="md:w-1/3">
-          <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="encryption">encryption:</label>
+          <label
+            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+            for="encryption"
+          >{{ t("encryption") }}:</label>
         </div>
         <div class="md:w-2/3 text-gray-700">
-          <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="encryption">
+          <select
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            v-model="encryption"
+          >
             <option value="WPA">WPA</option>
             <option value="WEP">WEP</option>
           </select>
@@ -18,7 +24,7 @@
           <label
             class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="ssid"
-          >ssid:</label>
+          >{{ t("ssid") }}:</label>
         </div>
         <div class="md:w-2/3">
           <input
@@ -36,7 +42,7 @@
           <label
             class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
             for="password"
-          >password:</label>
+          >{{ t("password") }}:</label>
         </div>
 
         <div class="md:w-2/3">
@@ -56,19 +62,42 @@
           type="submit"
           @click.prevent="generate"
           :disabled="noSsid || noPassword"
-        >generate</button>
+        >{{ t("generate") }}</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+const mappings = {
+  encryption: {
+    "zh-CN": "加密方式"
+  },
+  ssid: {
+    "zh-CN": "网络名称"
+  },
+  password: {
+    "zh-CN": "密码"
+  },
+  generate: {
+    "zh-CN": "生成二维码"
+  }
+};
+
 export default {
   name: "WifiQRCodeForm",
 
+  props: {
+    language: {
+      type: String,
+      required: true,
+      default: "en"
+    }
+  },
+
   data() {
     return {
-      encryption: 'WPA',
+      encryption: "WPA",
       ssid: null,
       password: null,
       generated: null
@@ -90,8 +119,16 @@ export default {
       if (!this.noSsid || !this.noPassword) {
         this.generated = `WIFI:T:${this.encryption};S:${this.ssid};P:${this.password};;`;
         // Event is a vue instance on window, window.Event
-        Event.$emit("pass_string_generated", this.generated);
+        Event.$emit("pass-string-generated", this.generated);
       }
+    },
+
+    t(key) {
+      if (!mappings[key] || !mappings[key][this.language]) {
+        return key;
+      }
+
+      return mappings[key][this.language];
     }
   }
 };
