@@ -16,11 +16,16 @@
       <p class="text-center text-sm text-gray-700 w-screen">
         <span>made with</span>
         <span class="px-1">❤️</span>by
-        <a href="https://twitter.com/bearzk">@bearzk</a>
+        <a href="https://twitter.com/bearzk" target="_blank" class="text-blue-700">@bearzk</a>
       </p>
       <p
         class="text-center text-sm text-gray-500 p-4"
       >{{ t("ssid and password are not sent anywhere, the QR code is generated in browser using javascript.") }}</p>
+      <p class="m-auto">
+        <a href="https://github.com/bearzk/vue-wifi-qrcode" target="_blank">
+          <img src="https://img.shields.io/badge/source-%40github-blue" alt="github link" />
+        </a>
+      </p>
     </div>
   </div>
 </template>
