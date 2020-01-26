@@ -15,15 +15,15 @@
       </div>
       <p class="text-center text-sm text-gray-700 w-screen">
         <span>made with</span>
-        <span class="px-1">❤️</span>by
+        <span class="pl-1">❤️</span>by
         <a href="https://twitter.com/bearzk" target="_blank" class="text-blue-700">@bearzk</a>
       </p>
       <p
         class="text-center text-sm text-gray-500 p-4"
       >{{ t("ssid and password are not sent anywhere, the QR code is generated in browser using javascript.") }}</p>
       <p class="m-auto">
-        <a href="https://github.com/bearzk/vue-wifi-qrcode" target="_blank">
-          <img src="https://img.shields.io/badge/source-%40github-blue" alt="github link" />
+        <a :href="githref" target="_blank">
+          <img :src="shieldBadge" alt="github link" />
         </a>
       </p>
     </div>
@@ -60,11 +60,14 @@ export default {
     return {
       passString: null,
       showForm: true,
-      language: "en-US"
+      language: "en-US",
+      githash: null,
+      githref: "https://github.com/bearzk/vue-wifi-qrcode/",
+      shieldBadge: "https://img.shields.io/badge/source-%40github-blue"
     };
   },
 
-  created() {
+  async created() {
     Event.$on("pass-string-generated", passString => {
       this.passString = passString;
       this.showForm = false;
@@ -73,6 +76,16 @@ export default {
     Event.$on("language-changed", lang => {
       this.language = lang;
     });
+
+    fetch("/hash")
+      .then(response => {
+        return response.text();
+      })
+      .then(hash => {
+        this.githash = hash.replace(/\n/, "");
+        this.githref = `https://github.com/bearzk/vue-wifi-qrcode/tree/${this.githash}`;
+        this.shieldBadge = `https://img.shields.io/badge/${this.githash}-%40github-blue`;
+      });
   },
 
   methods: {
