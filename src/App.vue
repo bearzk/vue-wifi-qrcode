@@ -79,7 +79,6 @@ export default {
 
     fetch("/hash")
       .then(response => {
-        console.log(response);
         return response.text();
       })
       .then(hash => {

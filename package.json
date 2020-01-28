@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "git rev-parse --short HEAD > public/hash && vue-cli-service serve",
-    "build": "rm -rf dist && mkdir dist && git rev-parse --short HEAD > dist/hash && vue-cli-service build",
+    "build": "rm -rf dist && mkdir dist && vue-cli-service build && git rev-parse --short HEAD > dist/hash",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
