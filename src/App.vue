@@ -9,6 +9,17 @@
       </div>
       <div v-if="passString" class="mx-auto mb-4 shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <QrcodeVue :value="passString" :size="300"></QrcodeVue>
+
+        <div class="pt-6 text-center">
+          <!-- <div class="flex justify-between"> -->
+          <p class="text-gray-500">{{t('ssid')}}:</p>
+          <p>{{ssid}}</p>
+          <!-- </div> -->
+          <!-- <div class="flex justify-between"> -->
+          <p class="text-gray-500">{{t('password')}}:</p>
+          <p>{{password}}</p>
+          <!-- </div> -->
+        </div>
       </div>
       <div class="w-full" v-if="!passString">
         <LanguageSwitcher :language="language"></LanguageSwitcher>
@@ -44,6 +55,13 @@ const mappings = {
       "我们不会保存你的网络名称和密码，也不会把它们发到任何第三方，二维码完全是在你使用的浏览器里用代码生成，请放心使用。",
     "de-DE":
       "ssid und passwort werden nirgendwo hin gesendet, der QR code wird im browser mit javascript generiert."
+  },
+  ssid: {
+    "zh-CN": "网络名称"
+  },
+  password: {
+    "zh-CN": "密码",
+    "de-DE": "Passwort"
   }
 };
 
@@ -58,6 +76,8 @@ export default {
 
   data: function() {
     return {
+      ssid: null,
+      password: null,
       passString: null,
       showForm: true,
       language: "en-US",
@@ -68,8 +88,10 @@ export default {
   },
 
   async created() {
-    Event.$on("pass-string-generated", passString => {
-      this.passString = passString;
+    Event.$on("pass-string-generated", payload => {
+      this.passString = payload.passString;
+      this.ssid = payload.ssid;
+      this.password = payload.password;
       this.showForm = false;
     });
 

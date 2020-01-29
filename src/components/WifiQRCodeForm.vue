@@ -121,8 +121,13 @@ export default {
     generate() {
       if (!this.noSsid || !this.noPassword) {
         this.generated = `WIFI:T:${this.encryption};S:${this.ssid};P:${this.password};;`;
+        const payload = {
+          passString: this.generated,
+          ssid: this.ssid,
+          password: this.password
+        };
         // Event is a vue instance on window, window.Event
-        Event.$emit("pass-string-generated", this.generated);
+        Event.$emit("pass-string-generated", payload);
       }
     },
 
