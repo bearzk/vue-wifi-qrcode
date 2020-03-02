@@ -7,17 +7,17 @@
       <div class="w-full" v-show="showForm">
         <WifiQRCodeForm :language="language"></WifiQRCodeForm>
       </div>
-      <div v-if="passString" class="mx-auto mb-4 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div v-if="passString" class="mx-auto mb-4 shadow-md rounded px-8 pt-8 pb-8 mb-4">
         <QrcodeVue :value="passString" :size="300"></QrcodeVue>
 
         <div class="pt-6 text-center">
           <!-- <div class="flex justify-between"> -->
           <p class="text-gray-500">{{t('ssid')}}:</p>
-          <p>{{ssid}}</p>
+          <p class="text-3xl text-gray-600 tracking-wide">{{ssid}}</p>
           <!-- </div> -->
           <!-- <div class="flex justify-between"> -->
           <p class="text-gray-500">{{t('password')}}:</p>
-          <p>{{password}}</p>
+          <p class="text-3xl text-gray-600 tracking-wide">{{password}}</p>
           <!-- </div> -->
         </div>
       </div>
